@@ -4,7 +4,7 @@
     "item": "minecraft:sand"
   },
   "result": {
-    "id": "minecraft:gravel"
+    "item": "minecraft:gravel"
   },
   "energy": 50000
 }

@@ -4,7 +4,7 @@
     "item": "minecraft:charcoal"
   },
   "result": {
-    "id": "minecraft:coal"
+    "item": "minecraft:coal"
   },
   "energy": 60000
 }

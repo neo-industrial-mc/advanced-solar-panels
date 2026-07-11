@@ -4,7 +4,7 @@
     "tag": "c:ingots/tin"
   },
   "result": {
-    "id": "ic2:silver_ingot"
+    "item": "ic2:silver_ingot"
   },
   "energy": 500000
 }

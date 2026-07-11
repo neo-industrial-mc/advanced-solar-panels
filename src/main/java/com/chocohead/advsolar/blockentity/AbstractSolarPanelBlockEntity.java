@@ -29,8 +29,6 @@ public abstract class AbstractSolarPanelBlockEntity extends TileEntityBase imple
     @GuiSynced public int storage;
     @GuiSynced public GenerationState generationState = GenerationState.NONE;
     private int ticker;
-    private boolean canRain;
-    private boolean hasSkyLight;
 
     protected AbstractSolarPanelBlockEntity(BlockEntityType<? extends TileEntityInventory> type, BlockPos pos, BlockState state,
                                              int dayPower, int nightPower, int maxStorage, int tier) {
@@ -45,8 +43,6 @@ public abstract class AbstractSolarPanelBlockEntity extends TileEntityBase imple
 
     @Override protected void onLoaded() {
         super.onLoaded();
-        hasSkyLight = level.dimensionType().hasSkyLight();
-        canRain = level.getBiome(worldPosition).value().getPrecipitationAt(worldPosition) != net.minecraft.world.level.biome.Biome.Precipitation.NONE;
         updateGenerationState();
     }
 
@@ -59,7 +55,10 @@ public abstract class AbstractSolarPanelBlockEntity extends TileEntityBase imple
     }
 
     public void updateGenerationState() {
-        if (!hasSkyLight || !level.canSeeSky(worldPosition.above())) {
+        // Computed inline rather than cached from onLoaded: IC2R defers onLoaded to the
+        // first tick, so cached values are unreliable for callers between placement and then.
+        boolean canRain = level.getBiome(worldPosition).value().getPrecipitationAt(worldPosition) != net.minecraft.world.level.biome.Biome.Precipitation.NONE;
+        if (!level.dimensionType().hasSkyLight() || !level.canSeeSky(worldPosition.above())) {
             generationState = GenerationState.NONE;
         } else if (level.isDay() && (!canRain || (!level.isRaining() && !level.isThundering()))) {
             generationState = GenerationState.DAY;

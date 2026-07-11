@@ -4,7 +4,7 @@
     "item": "minecraft:iron_ingot"
   },
   "result": {
-    "id": "ic2:iridium_ore"
+    "item": "ic2:iridium_ore"
   },
   "energy": 9000000
 }

@@ -4,7 +4,7 @@
     "item": "minecraft:dirt"
   },
   "result": {
-    "id": "minecraft:clay"
+    "item": "minecraft:clay"
   },
   "energy": 50000
 }

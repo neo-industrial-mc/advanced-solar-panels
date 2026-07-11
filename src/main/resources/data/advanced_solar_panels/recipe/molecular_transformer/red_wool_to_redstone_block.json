@@ -4,7 +4,7 @@
     "item": "minecraft:red_wool"
   },
   "result": {
-    "id": "minecraft:redstone_block"
+    "item": "minecraft:redstone_block"
   },
   "energy": 500000
 }

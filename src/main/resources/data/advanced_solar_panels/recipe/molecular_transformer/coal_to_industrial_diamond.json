@@ -4,7 +4,7 @@
     "item": "minecraft:coal"
   },
   "result": {
-    "id": "ic2:industrial_diamond"
+    "item": "ic2:industrial_diamond"
   },
   "energy": 9000000
 }

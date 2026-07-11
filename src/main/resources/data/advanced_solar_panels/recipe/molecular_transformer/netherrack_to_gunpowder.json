@@ -4,8 +4,8 @@
     "item": "minecraft:netherrack"
   },
   "result": {
-    "id": "minecraft:gunpowder",
-    "count": 2
+    "count": 2,
+    "item": "minecraft:gunpowder"
   },
   "energy": 70000
 }

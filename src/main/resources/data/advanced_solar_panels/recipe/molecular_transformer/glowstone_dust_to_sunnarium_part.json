@@ -4,7 +4,7 @@
     "item": "minecraft:glowstone_dust"
   },
   "result": {
-    "id": "advanced_solar_panels:sunnarium_part"
+    "item": "advanced_solar_panels:sunnarium_part"
   },
   "energy": 1000000
 }

@@ -4,7 +4,7 @@
     "item": "ic2:industrial_diamond"
   },
   "result": {
-    "id": "minecraft:diamond"
+    "item": "minecraft:diamond"
   },
   "energy": 1000000
 }

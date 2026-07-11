@@ -4,7 +4,7 @@
     "item": "minecraft:yellow_wool"
   },
   "result": {
-    "id": "minecraft:glowstone"
+    "item": "minecraft:glowstone"
   },
   "energy": 500000
 }
