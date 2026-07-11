@@ -1,0 +1,10 @@
+{
+  "type": "advanced_solar_panels:molecular_transformer",
+  "ingredient": {
+    "tag": "c:ingots/tin"
+  },
+  "result": {
+    "id": "ic2:silver_ingot"
+  },
+  "energy": 500000
+}

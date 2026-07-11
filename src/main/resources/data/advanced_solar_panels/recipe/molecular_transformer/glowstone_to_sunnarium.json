@@ -1,0 +1,10 @@
+{
+  "type": "advanced_solar_panels:molecular_transformer",
+  "ingredient": {
+    "item": "minecraft:glowstone"
+  },
+  "result": {
+    "id": "advanced_solar_panels:sunnarium"
+  },
+  "energy": 9000000
+}

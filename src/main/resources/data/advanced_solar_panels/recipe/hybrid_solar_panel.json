@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PLP",
+    "IAI",
+    "CSC"
+  ],
+  "key": {
+    "P": {
+      "item": "ic2:carbon_plate"
+    },
+    "L": {
+      "item": "minecraft:lapis_block"
+    },
+    "I": {
+      "tag": "c:ingots/iridium"
+    },
+    "A": {
+      "item": "advanced_solar_panels:advanced_solar_panel"
+    },
+    "C": {
+      "item": "ic2:advanced_circuit"
+    },
+    "S": {
+      "item": "advanced_solar_panels:enriched_sunnarium"
+    }
+  },
+  "result": {
+    "id": "advanced_solar_panels:hybrid_solar_panel"
+  }
+}

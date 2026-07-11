@@ -1,0 +1,10 @@
+{
+  "type": "advanced_solar_panels:molecular_transformer",
+  "ingredient": {
+    "item": "minecraft:blue_wool"
+  },
+  "result": {
+    "id": "minecraft:lapis_block"
+  },
+  "energy": 500000
+}

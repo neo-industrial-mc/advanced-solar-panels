@@ -1,0 +1,9 @@
+{
+  "type": "ic2:compressor",
+  "ingredient": {
+    "item": "ic2:iridium_shard"
+  },
+  "result": {
+    "item": "advanced_solar_panels:iridium_ingot"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "advanced_solar_panels:molecular_transformer",
+  "ingredient": {
+    "item": "minecraft:charcoal"
+  },
+  "result": {
+    "id": "minecraft:coal"
+  },
+  "energy": 60000
+}

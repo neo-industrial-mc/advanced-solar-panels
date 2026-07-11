@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "CNC",
+    "GTG"
+  ],
+  "key": {
+    "S": {
+      "item": "advanced_solar_panels:advanced_solar_panel"
+    },
+    "C": {
+      "item": "ic2:advanced_circuit"
+    },
+    "N": {
+      "item": "ic2:nano_helmet"
+    },
+    "G": {
+      "item": "ic2:double_insulated_gold_cable"
+    },
+    "T": {
+      "item": "ic2:lv_transformer"
+    }
+  },
+  "result": {
+    "id": "advanced_solar_panels:advanced_solar_helmet"
+  }
+}

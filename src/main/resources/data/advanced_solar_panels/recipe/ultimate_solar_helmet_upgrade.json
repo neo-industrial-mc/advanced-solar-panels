@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "advanced_solar_panels:hybrid_solar_helmet"
+    },
+    {
+      "item": "advanced_solar_panels:ultimate_solar_panel"
+    }
+  ],
+  "result": {
+    "id": "advanced_solar_panels:ultimate_solar_helmet"
+  }
+}

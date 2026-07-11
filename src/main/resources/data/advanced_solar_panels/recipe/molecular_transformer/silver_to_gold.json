@@ -1,0 +1,10 @@
+{
+  "type": "advanced_solar_panels:molecular_transformer",
+  "ingredient": {
+    "tag": "c:ingots/silver"
+  },
+  "result": {
+    "id": "minecraft:gold_ingot"
+  },
+  "energy": 500000
+}

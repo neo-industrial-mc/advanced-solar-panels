@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "UUU",
+    "UCU",
+    "UUU"
+  ],
+  "key": {
+    "U": {
+      "item": "advanced_solar_panels:ultimate_solar_panel"
+    },
+    "C": {
+      "item": "advanced_solar_panels:quantum_core"
+    }
+  },
+  "result": {
+    "id": "advanced_solar_panels:quantum_solar_panel"
+  }
+}

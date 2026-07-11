@@ -1,0 +1,10 @@
+{
+  "type": "advanced_solar_panels:molecular_transformer",
+  "ingredient": {
+    "item": "minecraft:coal"
+  },
+  "result": {
+    "id": "ic2:industrial_diamond"
+  },
+  "energy": 9000000
+}

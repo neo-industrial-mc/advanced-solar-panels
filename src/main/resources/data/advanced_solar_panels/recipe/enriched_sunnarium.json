@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "ISI",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "item": "advanced_solar_panels:irradiant_uranium"
+    },
+    "S": {
+      "item": "advanced_solar_panels:sunnarium"
+    }
+  },
+  "result": {
+    "id": "advanced_solar_panels:enriched_sunnarium"
+  }
+}

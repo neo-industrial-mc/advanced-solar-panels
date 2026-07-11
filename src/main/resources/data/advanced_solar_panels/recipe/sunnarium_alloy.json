@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "ISI",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "tag": "c:ingots/iridium"
+    },
+    "S": {
+      "item": "advanced_solar_panels:sunnarium"
+    }
+  },
+  "result": {
+    "id": "advanced_solar_panels:sunnarium_alloy"
+  }
+}
