@@ -1,6 +1,7 @@
 plugins {
     id 'java-library'
     id 'net.neoforged.moddev' version '2.0.141'
+    id 'com.diffplug.spotless' version '8.8.0'
     id 'idea'
 }
 
@@ -107,6 +108,22 @@ neoForge.ideSyncTask generateModMetadata
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+
+spotless {
+    java {
+        googleJavaFormat()
+        formatAnnotations()
+        removeUnusedImports()
+    }
+
+    format 'misc', {
+        target '*.gradle', '*.md', '.gitignore', 'gradle.properties',
+                'src/**/*.json', 'src/**/*.mcmeta', 'src/**/*.toml', 'src/**/*.xml'
+        targetExclude 'src/generated/**', 'parity/**'
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
 }
 
 idea {
