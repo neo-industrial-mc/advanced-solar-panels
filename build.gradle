@@ -19,7 +19,22 @@ sourceSets.main.resources {
 
 repositories {
     mavenCentral()
-    maven { url = 'file:///Users/flame/Desktop/Experiments/mc/IC2R/repo' }
+
+    // Prefer a sibling IC2R checkout for local development. CI resolves the same
+    // artifact from IC2R's GitHub Packages Maven registry.
+    maven { url = uri('../IC2R/repo') }
+
+    def githubPackagesToken = providers.environmentVariable('GITHUB_TOKEN')
+    if (githubPackagesToken.isPresent()) {
+        maven {
+            name = 'IC2RGitHubPackages'
+            url = uri('https://maven.pkg.github.com/neo-industrial-mc/IC2R')
+            credentials {
+                username = providers.environmentVariable('GITHUB_ACTOR').getOrElse('github-actions')
+                password = githubPackagesToken.get()
+            }
+        }
+    }
 }
 
 base {
@@ -76,8 +91,7 @@ dependencies {
     // MDG recognizes this dependency as a dev-run mod because its jar contains
     // META-INF/neoforge.mods.toml; implementation also supplies the compile classpath.
     implementation('me.halfcooler.ic2r.core:IC2R:21.1.0') {
-        // IC2R is a local fork published to ../IC2R/repo; its pom references
-        // JEI on remote mavens we don't use — resolve the jar only.
+        // IC2R's pom references JEI on remote mavens we don't use; resolve the jar only.
         transitive = false
     }
 }

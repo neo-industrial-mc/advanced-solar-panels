@@ -19,7 +19,7 @@ NeoForge 1.21.1 as an addon for **IndustrialCraft 2: Refactored** (the local for
 
 ## Build / test
 ```
-./gradlew build              # requires ../IC2R published to its local repo (./gradlew publish there)
+./gradlew build              # uses ../IC2R/repo, or IC2R GitHub Packages with GITHUB_TOKEN
 ./gradlew spotlessCheck      # verify formatting (also runs as part of check/build)
 ./gradlew spotlessApply      # format source and project text files
 ./gradlew runGameTestServer  # 11 gametests
