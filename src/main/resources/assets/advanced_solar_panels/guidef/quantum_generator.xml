@@ -6,7 +6,7 @@
 	<only if="active">
 		<image x="145" y="21" width="14" height="14" u="176" v="3" basesize="256" src="advanced_solar_panels:textures/gui/quantum_generator.png"/>
 	</only>
-	
+
 	<text x="88" y="25" right="true" color="16777215">{gui.advanced_solar_panels.output}</text>
 	<text x="88" y="69" right="true" color="16777215">{gui.advanced_solar_panels.tier}</text>
 
@@ -28,7 +28,7 @@
     	<button x="110" y="40" width="26" height="20" event="4">+10</button>
     	<button x="137" y="40" width="32" height="20" event="5">+100</button>
 	</key>
-	
+
 	<key key="shift">
 		<button x="6" y="40" width="32" height="20" event="10">-500</button>
 		<button x="39" y="40" width="26" height="20" event="11">-50</button>
