@@ -45,6 +45,25 @@ public final class MachineGameTests {
         });
     }
 
+    @GameTest(template = EMPTY, timeoutTicks = 40)
+    public static void molecularTransformerRefusesOvershoot(GameTestHelper helper) {
+        MolecularTransformerBlockEntity transformer = placeTransformer(helper);
+        transformer.input.put(new ItemStack(Items.SAND));
+
+        helper.runAtTickTime(2, () -> transformer.getComponent(Energy.class).addEnergy(49999.0));
+        helper.runAtTickTime(6, () -> {
+            double accepted = transformer.getComponent(Energy.class).addEnergy(1000000.0);
+            AdvSolarGameTestAssertions.assertNear(helper, accepted, 1.0, 0.0,
+                    "a nearly-complete recipe must only demand its remaining EU");
+        });
+        helper.runAtTickTime(10, () -> {
+            helper.assertValueEqual(transformer.output.get().getItem(), Items.GRAVEL, "recipe output after exact completion");
+            AdvSolarGameTestAssertions.assertNear(helper, transformer.getComponent(Energy.class).getEnergy(), 0.0, 0.0,
+                    "no EU may linger in the buffer after completion");
+            helper.succeed();
+        });
+    }
+
     @GameTest(template = EMPTY, timeoutTicks = 100)
     public static void molecularTransformerStopsWithoutEnergy(GameTestHelper helper) {
         MolecularTransformerBlockEntity transformer = placeTransformer(helper);

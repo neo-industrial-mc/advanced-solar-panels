@@ -46,7 +46,12 @@ public final class MolecularTransformerBlockEntity extends TileEntityBase implem
         if (currentRecipe == null) { lastEnergyGiven = 0; return; }
         double received = energy.getEnergy();
         lastEnergyGiven = received;
-        if (received > 0) { energyUsed += received; energy.useEnergy(received); idleTicks = 0; setActiveState(true, false); }
+        if (received > 0) {
+            energyUsed += received; energy.useEnergy(received); idleTicks = 0; setActiveState(true, false);
+            // Demand (capacity - storage) must only ever advertise the REMAINING recipe
+            // cost, or the net could deliver — and this block destroy — the full cost again.
+            energy.setCapacity(Math.max(0, totalEnergy - energyUsed));
+        }
         else if (++idleTicks >= 40) setActiveState(false, false);
         if (energyUsed >= totalEnergy) finish();
     }
@@ -69,7 +74,7 @@ public final class MolecularTransformerBlockEntity extends TileEntityBase implem
     private void finish() { output.add(recipeOutput.copy()); currentRecipe = null; recipeInput = ItemStack.EMPTY; recipeOutput = ItemStack.EMPTY; totalEnergy = 0; energyUsed = 0; energy.setCapacity(0); idleTicks = 0; setActiveState(false, false); setChanged(); }
     @Override protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) { super.loadAdditional(tag, registries); energyUsed = tag.getDouble("energyUsed"); recipeInput = ItemStack.parseOptional(registries, tag.getCompound("recipe")); }
     @Override public void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) { super.saveAdditional(tag, registries); tag.putDouble("energyUsed", energyUsed); if (!recipeInput.isEmpty()) tag.put("recipe", recipeInput.save(registries)); }
-    @Override protected void onLoaded() { super.onLoaded(); if (!recipeInput.isEmpty() && level.getServer() != null) { double savedEnergy = energyUsed; ItemStack saved = recipeInput.copy(); input.put(saved.copy()); tryStart(); input.put(ItemStack.EMPTY); energyUsed = Math.min(savedEnergy, totalEnergy); } }
+    @Override protected void onLoaded() { super.onLoaded(); if (!recipeInput.isEmpty() && level.getServer() != null) { double savedEnergy = energyUsed; ItemStack saved = recipeInput.copy(); input.put(saved.copy()); tryStart(); input.put(ItemStack.EMPTY); energyUsed = Math.min(savedEnergy, totalEnergy); energy.setCapacity(Math.max(0, totalEnergy - energyUsed)); } }
     @Override public double getGuiValue(String name) { return "progress".equals(name) && totalEnergy > 0 ? energyUsed / totalEnergy : 0; }
     public String getInput() { return recipeInput.isEmpty() ? "-" : recipeInput.getHoverName().getString(); }
     public String getOutput() { return recipeOutput.isEmpty() ? "-" : recipeOutput.getHoverName().getString(); }
