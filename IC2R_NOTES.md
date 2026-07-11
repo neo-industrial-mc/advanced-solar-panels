@@ -1,7 +1,7 @@
 # IC2R (NeoForge 1.21.1) architecture notes — for the ASP addon port
 
 IC2R repo: `../IC2R` (absolute: `/Users/flame/Desktop/Experiments/mc/IC2R`). Mod id `ic2`,
-maven `me.halfcooler.ic2r.core:IC2R:21.1.0`, ALREADY published to `../IC2R/repo` (file maven repo;
+maven `me.halfcooler.ic2r.core:ic2r:21.1.0`, ALREADY published to `../IC2R/repo` (file maven repo;
 re-publish with `./gradlew publish` if IC2R changes). Built jar also at `../IC2R/build/libs/ic2-neoforge-21.1.0.jar`.
 The jar ships BOTH `ic2.api.*` and `ic2.core.*` — the addon may extend internal `ic2.core` classes
 (pin version 21.1.0).
