@@ -7,12 +7,12 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public final class ASPMenus {
-    public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, AdvancedSolarPanels.MOD_ID);
+  public static final DeferredRegister<MenuType<?>> MENUS =
+      DeferredRegister.create(Registries.MENU, AdvancedSolarPanels.MOD_ID);
 
-    private ASPMenus() {
-    }
+  private ASPMenus() {}
 
-    public static void register(IEventBus modEventBus) {
-        MENUS.register(modEventBus);
-    }
+  public static void register(IEventBus modEventBus) {
+    MENUS.register(modEventBus);
+  }
 }
