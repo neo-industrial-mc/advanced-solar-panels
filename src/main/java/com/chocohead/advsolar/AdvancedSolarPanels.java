@@ -8,6 +8,8 @@ import com.chocohead.advsolar.registry.ASPRecipes;
 import ic2.api.energy.EnergyNet;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.api.distmarker.Dist;
 
 @Mod(AdvancedSolarPanels.MOD_ID)
 public final class AdvancedSolarPanels {
@@ -19,6 +21,7 @@ public final class AdvancedSolarPanels {
         ASPBlockEntities.register(modEventBus);
         ASPMenus.register(modEventBus);
         ASPRecipes.register(modEventBus);
+        if (FMLEnvironment.dist == Dist.CLIENT) com.chocohead.advsolar.client.ASPClient.register(modEventBus);
     }
 
     // Compile-time linkage check for the required IC2R API dependency.
