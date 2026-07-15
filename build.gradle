@@ -90,7 +90,7 @@ neoForge {
 dependencies {
     // MDG recognizes this dependency as a dev-run mod because its jar contains
     // META-INF/neoforge.mods.toml; implementation also supplies the compile classpath.
-    implementation('me.halfcooler.ic2r.core:ic2r:21.1.0') {
+    implementation('me.halfcooler.ic2r.core:ic2r:20.1.40') {
         // IC2R's pom references JEI on remote mavens we don't use; resolve the jar only.
         transitive = false
     }
