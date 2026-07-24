@@ -3,14 +3,19 @@ package com.chocohead.advsolar.gametest;
 import com.chocohead.advsolar.blockentity.MolecularTransformerBlockEntity;
 import com.chocohead.advsolar.blockentity.QuantumGeneratorBlockEntity;
 import com.chocohead.advsolar.registry.ASPBlocks;
+import ic2.core.IHasGui;
 import ic2.core.block.comp.Energy;
 import ic2.core.block.wiring.tileentity.TileEntityElectricMFE;
 import ic2.core.ref.Ic2Blocks;
+import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.gametest.GameTestHolder;
@@ -164,6 +169,37 @@ public final class MachineGameTests {
               0.0,
               0.0,
               "MFE energy while generator is redstone-disabled");
+          helper.succeed();
+        });
+  }
+
+  @GameTest(template = EMPTY, timeoutTicks = 40)
+  public static void machineGuisOpenServerSide(GameTestHelper helper) {
+    List<Block> machines =
+        List.of(
+            ASPBlocks.ADVANCED_SOLAR_PANEL.get(),
+            ASPBlocks.HYBRID_SOLAR_PANEL.get(),
+            ASPBlocks.ULTIMATE_SOLAR_PANEL.get(),
+            ASPBlocks.QUANTUM_SOLAR_PANEL.get(),
+            ASPBlocks.QUANTUM_GENERATOR.get(),
+            ASPBlocks.MOLECULAR_TRANSFORMER.get());
+
+    helper.runAtTickTime(
+        2,
+        () -> {
+          Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+          for (Block machine : machines) {
+            helper.setBlock(MACHINE_POS, machine);
+            BlockEntity blockEntity = helper.getBlockEntity(MACHINE_POS);
+            helper.assertTrue(
+                blockEntity instanceof IHasGui,
+                machine.getName().getString() + " should have a GUI-capable block entity");
+            // Parses the guidef XML from the addon jar, which IC2R must be able to see
+            // across the mod module boundary.
+            helper.assertTrue(
+                ((IHasGui) blockEntity).createServerScreenHandler(1, player) != null,
+                machine.getName().getString() + " must build its server screen handler");
+          }
           helper.succeed();
         });
   }
