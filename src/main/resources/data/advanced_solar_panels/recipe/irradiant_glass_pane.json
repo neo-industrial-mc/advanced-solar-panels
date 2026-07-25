@@ -17,6 +17,7 @@
     }
   },
   "result": {
-    "id": "advanced_solar_panels:irradiant_glass_pane"
+    "id": "advanced_solar_panels:irradiant_glass_pane",
+    "count": 6
   }
 }
