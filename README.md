@@ -12,6 +12,7 @@ NeoForge 1.21.1 as an addon for **IndustrialCraft 2: Refactored** (the local for
 - **Molecular Transformer**: converts items using pure EU (no processing time), tier-14 sink.
   Recipes are a datapack recipe type `advanced_solar_panels:molecular_transformer`:
   `{"ingredient": {...}, "count": 1, "result": {"item": "...", "count": 1}, "energy": 50000}`.
+  When JEI is installed, its recipe category shows inputs, outputs, and the required EU.
 - **Solar helmets**: Advanced/Hybrid/Ultimate electric helmets that generate EU while worn and
   charge worn armor, then inventory items, then themselves. Hybrid+ refill air underwater and are dyeable.
 - 14 crafting components (sunnarium chain, iridium plates, cores), full recipe graph
@@ -34,5 +35,5 @@ NeoForge 1.21.1 as an addon for **IndustrialCraft 2: Refactored** (the local for
 ## Known deviations from 4.3.0
 - No config file: 1.12 config values are constants (defaults).
 - Molecular Transformer uses a full-block collision shape and no animated beam TESR.
-- No JEI category, helmet HUD modes, or double stone slab item.
+- No helmet HUD modes or double stone slab item.
 - Molecular Transformer recipes moved from a cfg file to datapack JSON.

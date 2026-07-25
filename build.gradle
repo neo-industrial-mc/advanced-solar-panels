@@ -19,6 +19,7 @@ sourceSets.main.resources {
 
 repositories {
     mavenCentral()
+    maven { url = uri('https://maven.blamejared.com/') }
 
     // Prefer a sibling IC2R checkout for local development. CI resolves the same
     // artifact from IC2R's GitHub Packages Maven registry.
@@ -87,7 +88,14 @@ neoForge {
     }
 }
 
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
+}
+
 dependencies {
+    compileOnly "mezz.jei:jei-1.21.1-neoforge-api:${jei_version}"
+    runtimeOnly "mezz.jei:jei-1.21.1-neoforge:${jei_version}"
+
     // MDG recognizes this dependency as a dev-run mod because its jar contains
     // META-INF/neoforge.mods.toml; implementation also supplies the compile classpath.
     implementation('me.halfcooler.ic2r.core:ic2r:21.1.51') {
