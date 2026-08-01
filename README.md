@@ -14,7 +14,8 @@ NeoForge 1.21.1 as an addon for **IndustrialCraft 2: Refactored** (the local for
   `{"ingredient": {...}, "count": 1, "result": {"item": "...", "count": 1}, "energy": 50000}`.
   When JEI is installed, its recipe category shows inputs, outputs, and the required EU.
 - **Solar helmets**: Advanced/Hybrid/Ultimate electric helmets that generate EU while worn and
-  charge worn armor, then inventory items, then themselves. Hybrid+ refill air underwater and are dyeable.
+  charge worn armor, then inventory items, then themselves. Hybrid+ are dyeable and retain the
+  QuantumSuit Helmet's protection, HUD, night vision, auto-feeding, air, and status-effect behavior.
 - 14 crafting components (sunnarium chain, iridium plates, cores), full recipe graph
   (hard-recipe defaults), 4 languages.
 
@@ -23,7 +24,7 @@ NeoForge 1.21.1 as an addon for **IndustrialCraft 2: Refactored** (the local for
 ./gradlew build              # uses ../IC2R/repo, or IC2R GitHub Packages with GITHUB_TOKEN
 ./gradlew spotlessCheck      # verify formatting (also runs as part of check/build)
 ./gradlew spotlessApply      # format source and project text files
-./gradlew runGameTestServer  # 11 gametests
+./gradlew runGameTestServer  # 15 gametests
 ./gradlew runClient
 ```
 
@@ -35,5 +36,5 @@ NeoForge 1.21.1 as an addon for **IndustrialCraft 2: Refactored** (the local for
 ## Known deviations from 4.3.0
 - No config file: 1.12 config values are constants (defaults).
 - Molecular Transformer uses a full-block collision shape and no animated beam TESR.
-- No helmet HUD modes or double stone slab item.
+- The Advanced Solar Helmet has no HUD mode; the double stone slab item is omitted.
 - Molecular Transformer recipes moved from a cfg file to datapack JSON.

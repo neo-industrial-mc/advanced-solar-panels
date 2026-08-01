@@ -71,36 +71,28 @@ public final class ASPItems {
                   800,
                   .9,
                   false));
-  public static final DeferredHolder<Item, SolarHelmetItem> HYBRID_SOLAR_HELMET =
+  public static final DeferredHolder<Item, SolarQuantumHelmetItem> HYBRID_SOLAR_HELMET =
       ITEMS.register(
           "hybrid_solar_helmet",
           () ->
-              new SolarHelmetItem(
+              new SolarQuantumHelmetItem(
                   ASPArmorMaterials.create("hybrid_solar", true),
-                  new Item.Properties().rarity(Rarity.RARE),
-                  10_000_000,
+                  SolarQuantumHelmetItem.properties(Rarity.RARE),
                   10_000,
-                  4,
                   64,
                   8,
-                  2000,
-                  1,
-                  true));
-  public static final DeferredHolder<Item, SolarHelmetItem> ULTIMATE_SOLAR_HELMET =
+                  2000));
+  public static final DeferredHolder<Item, SolarQuantumHelmetItem> ULTIMATE_SOLAR_HELMET =
       ITEMS.register(
           "ultimate_solar_helmet",
           () ->
-              new SolarHelmetItem(
+              new SolarQuantumHelmetItem(
                   ASPArmorMaterials.create("ultimate_solar", true),
-                  new Item.Properties().rarity(Rarity.EPIC),
-                  10_000_000,
+                  SolarQuantumHelmetItem.properties(Rarity.EPIC),
                   10_000,
-                  4,
                   512,
                   64,
-                  2000,
-                  1,
-                  true));
+                  2000));
   public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN_TAB =
       CREATIVE_MODE_TABS.register(
           "main",
