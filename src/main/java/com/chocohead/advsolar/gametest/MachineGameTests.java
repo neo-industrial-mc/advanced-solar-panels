@@ -9,6 +9,7 @@ import ic2.core.block.wiring.tileentity.TileEntityElectricMFE;
 import ic2.core.ref.Ic2Blocks;
 import java.util.List;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.entity.player.Player;
@@ -18,8 +19,10 @@ import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
+import net.neoforged.neoforge.items.IItemHandler;
 
 @GameTestHolder("advanced_solar_panels")
 @PrefixGameTestTemplate(false)
@@ -124,6 +127,44 @@ public final class MachineGameTests {
         });
   }
 
+  @GameTest(template = EMPTY, timeoutTicks = 20)
+  public static void molecularTransformerAcceptsPatternProviderInput(GameTestHelper helper) {
+    MolecularTransformerBlockEntity transformer = placeTransformer(helper);
+    IItemHandler handler = getItemHandler(helper, Direction.UP);
+
+    ItemStack rejectedOutput =
+        handler.insertItem(
+            transformer.getBaseIndex(transformer.output), new ItemStack(Items.GRAVEL), false);
+    helper.assertValueEqual(
+        rejectedOutput.getCount(), 1, "Pattern Provider insertion into the output slot");
+    helper.assertTrue(transformer.output.isEmpty(), "output slot must reject external insertion");
+
+    ItemStack remaining = insertIntoFirstAvailableSlot(handler, new ItemStack(Items.SAND));
+    helper.assertTrue(remaining.isEmpty(), "Pattern Provider should insert recipe input");
+    helper.assertValueEqual(transformer.input.get().getItem(), Items.SAND, "inserted input item");
+    helper.assertValueEqual(transformer.input.get().getCount(), 1, "inserted input count");
+    helper.succeed();
+  }
+
+  @GameTest(template = EMPTY, timeoutTicks = 20)
+  public static void molecularTransformerSuppliesImportBusOutput(GameTestHelper helper) {
+    MolecularTransformerBlockEntity transformer = placeTransformer(helper);
+    transformer.input.put(new ItemStack(Items.DIRT));
+    transformer.output.put(new ItemStack(Items.GRAVEL));
+    IItemHandler handler = getItemHandler(helper, Direction.DOWN);
+
+    ItemStack rejectedInput =
+        handler.extractItem(transformer.getBaseIndex(transformer.input), 1, false);
+    helper.assertTrue(rejectedInput.isEmpty(), "Import Bus must not extract unprocessed input");
+    helper.assertValueEqual(transformer.input.get().getItem(), Items.DIRT, "retained input item");
+
+    ItemStack extracted = extractFromFirstAvailableSlot(handler, 1);
+    helper.assertValueEqual(extracted.getItem(), Items.GRAVEL, "Import Bus extraction item");
+    helper.assertValueEqual(extracted.getCount(), 1, "Import Bus extraction count");
+    helper.assertTrue(transformer.output.isEmpty(), "Import Bus should remove machine output");
+    helper.succeed();
+  }
+
   @GameTest(template = EMPTY, timeoutTicks = 80)
   public static void quantumGeneratorEmitsConfiguredPower(GameTestHelper helper) {
     QuantumGeneratorBlockEntity generator = placeGeneratorAndMfe(helper);
@@ -207,6 +248,31 @@ public final class MachineGameTests {
   private static MolecularTransformerBlockEntity placeTransformer(GameTestHelper helper) {
     helper.setBlock(MACHINE_POS, ASPBlocks.MOLECULAR_TRANSFORMER.get());
     return getBlockEntity(helper, MACHINE_POS, MolecularTransformerBlockEntity.class);
+  }
+
+  private static IItemHandler getItemHandler(GameTestHelper helper, Direction side) {
+    IItemHandler handler =
+        helper
+            .getLevel()
+            .getCapability(Capabilities.ItemHandler.BLOCK, helper.absolutePos(MACHINE_POS), side);
+    helper.assertTrue(handler != null, "Molecular Transformer should expose an item handler");
+    return handler;
+  }
+
+  private static ItemStack insertIntoFirstAvailableSlot(IItemHandler handler, ItemStack stack) {
+    ItemStack remaining = stack;
+    for (int slot = 0; slot < handler.getSlots() && !remaining.isEmpty(); slot++) {
+      remaining = handler.insertItem(slot, remaining, false);
+    }
+    return remaining;
+  }
+
+  private static ItemStack extractFromFirstAvailableSlot(IItemHandler handler, int amount) {
+    for (int slot = 0; slot < handler.getSlots(); slot++) {
+      ItemStack extracted = handler.extractItem(slot, amount, false);
+      if (!extracted.isEmpty()) return extracted;
+    }
+    return ItemStack.EMPTY;
   }
 
   private static QuantumGeneratorBlockEntity placeGeneratorAndMfe(GameTestHelper helper) {

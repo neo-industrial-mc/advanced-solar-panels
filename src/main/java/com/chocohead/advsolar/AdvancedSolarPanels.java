@@ -2,6 +2,7 @@ package com.chocohead.advsolar;
 
 import com.chocohead.advsolar.registry.ASPBlockEntities;
 import com.chocohead.advsolar.registry.ASPBlocks;
+import com.chocohead.advsolar.registry.ASPCapabilities;
 import com.chocohead.advsolar.registry.ASPItems;
 import com.chocohead.advsolar.registry.ASPMenus;
 import com.chocohead.advsolar.registry.ASPRecipes;
@@ -24,6 +25,7 @@ public final class AdvancedSolarPanels {
     ASPBlockEntities.register(modEventBus);
     ASPMenus.register(modEventBus);
     ASPRecipes.register(modEventBus);
+    modEventBus.addListener(ASPCapabilities::register);
     modEventBus.addListener(AdvancedSolarPanels::setup);
     if (FMLEnvironment.dist == Dist.CLIENT)
       com.chocohead.advsolar.client.ASPClient.register(modEventBus);
